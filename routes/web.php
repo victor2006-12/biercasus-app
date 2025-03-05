@@ -4,6 +4,16 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\BeerController;
+
+Route::get('/beers', [BeerController::class, 'index']);
+Route::post('/rate', [BeerController::class, 'rateBeer']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/beers', [BeerController::class, 'index']);
+    Route::post('/beers/{id}/rate', [BeerController::class, 'rateBeer']);
+});
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
