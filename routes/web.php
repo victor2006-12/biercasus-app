@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\BeerController;
 
+
 Route::get('/beers', [BeerController::class, 'index']);
 Route::post('/rate', [BeerController::class, 'rateBeer']);
 
