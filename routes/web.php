@@ -5,16 +5,15 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\BeerController;
+use App\Http\Controllers\Api\ApiBeerController;
 
-
-Route::get('/beers', [BeerController::class, 'index']);
-Route::post('/rate', [BeerController::class, 'rateBeer']);
+Route::get('api/beers', [ApiBeerController::class, 'index']);
+Route::post('/rate', [ApiBeerController::class, 'rateBeer']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/beers', [BeerController::class, 'index']);
     Route::post('/beers/{id}/rate', [BeerController::class, 'rateBeer']);
 });
-
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -36,3 +35,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
