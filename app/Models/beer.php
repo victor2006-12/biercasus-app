@@ -7,13 +7,8 @@ use App\Models\Like;
 class Beer extends Model {
     use HasFactory;
 
-    public function index() {
-        return Beer::with('likes')->get();
+    public function likes() {
+        return $this->hasMany(Like::class, 'bier_id');
     }
-    public function averageRating() {
-        return $this->likes()->avg('rating');
-    }
-    
-    
-    
 }
+

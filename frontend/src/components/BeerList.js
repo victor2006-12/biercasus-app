@@ -11,7 +11,10 @@ const BeerList = () => {
                 setBeers(data);
                 setLoading(false);
             })
-            .catch(error => console.error("Fout bij ophalen biertjes:", error));
+            .catch(error => {
+                console.error("Fout bij ophalen biertjes:", error);
+                setLoading(false);
+            });
     }, []);
 
     if (loading) {
@@ -32,9 +35,11 @@ const BeerList = () => {
                     {beers.map(beer => (
                         <tr key={beer.id}>
                             <td>{beer.name}</td>
-                            <td>{beer.ratings.length > 0 
-                                ? (beer.ratings.reduce((sum, r) => sum + r.rating, 0) / beer.ratings.length).toFixed(1) + " ⭐" 
-                                : "Nog geen ratings"}</td>
+                            <td>
+                                {beer.likes.length > 0 
+                                    ? (beer.likes.reduce((sum, like) => sum + like.rating, 0) / beer.likes.length).toFixed(1) + " ⭐" 
+                                    : "Nog geen ratings"}
+                            </td>
                         </tr>
                     ))}
                 </tbody>

@@ -10,8 +10,9 @@ use Illuminate\Http\Request;
 class ApiBeerController extends Controller {
 
     public function index() {
-        return Beer::with('ratings')->get();
+        return Beer::with('likes')->get();
     }
+    
     
     public function rateBeer(Request $request, $id) {
         $request->validate([
@@ -19,9 +20,10 @@ class ApiBeerController extends Controller {
         ]);
     
         Like::updateOrCreate(
-            ['user_id' => auth()->id(), 'beer_id' => $id],
+            ['gebruikers_id' => auth()->id(), 'bier_id' => $id], // gebruikers_id corrigeren
             ['rating' => $request->rating]
         );
+        
     
         return response()->json(['message' => 'Rating opgeslagen']);
     }

@@ -7,7 +7,7 @@ use App\Models\Beer;
 
 class Like extends Model {
     use HasFactory;
-    protected $fillable = ['gebruikers_id', 'beer_id', 'rating'];
+    protected $fillable = ['gebruikers_id', 'bier_id', 'rating'];
 
     public function beer() {
         return $this->belongsTo(Beer::class);
