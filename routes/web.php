@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\BeerController;
 use App\Http\Controllers\Api\ApiBeerController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
 
 Route::get('api/beers', [ApiBeerController::class, 'index']);
 Route::post('/rate', [ApiBeerController::class, 'rateBeer']);
@@ -14,6 +20,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/beers', [BeerController::class, 'index']);
     Route::post('/beers/{id}/rate', [BeerController::class, 'rateBeer']);
 });
+Route::middleware('auth:sanctum')->get('/api/user', function (Request $request) {
+    return $request->user();
+});
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [

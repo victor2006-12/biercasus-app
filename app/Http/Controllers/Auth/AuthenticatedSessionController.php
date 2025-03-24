@@ -28,13 +28,14 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      */
     public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+{
+    $request->authenticate();
+    $request->session()->regenerate();
 
-        $request->session()->regenerate();
+    return redirect('/beerlist'); // Stuur gebruiker na inloggen naar beerlist.js
+}
 
-        return redirect()->intended(route('dashboard', absolute: false));
-    }
+    
 
     /**
      * Destroy an authenticated session.
@@ -45,7 +46,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->invalidate();
 
-        $request->session()->regenerateToken();
+        $request->session()->regenerateToken(); 
 
         return redirect('/');
     }

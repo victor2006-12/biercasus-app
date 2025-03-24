@@ -8,10 +8,10 @@ use App\Models\Like;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 class ApiBeerController extends Controller {
-
+    
     public function index() {
-        return Beer::with('likes')->get();
-    }
+        return Beer::with('likes')->get();  
+    }   
     
     
     public function rateBeer(Request $request, $id) {

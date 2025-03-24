@@ -19,18 +19,14 @@ return [
 
     'response_headers' => ['Access-Control-Allow-Origin' => ['*']],
 
-    'allowed_methods' => ['*'],
-
-    'allowed_origins' => ['*'],
-
     'allowed_origins_patterns' => [],
-
-    'allowed_headers' => ['*'],
-
     'exposed_headers' => [],
 
     'max_age' => 0,
+    'supports_credentials' => true,
+    'allowed_origins' => ['http://localhost:3000'],
+    'allowed_methods' => ['*'],
+    'allowed_headers' => ['*'],
 
-    'supports_credentials' => false,
 
 ];
